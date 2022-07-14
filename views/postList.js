@@ -1,6 +1,6 @@
 const html = require("html-template-tag");
 function postList (posts){
-    const response = html`<!DOCTYPE html>
+    const response = `<!DOCTYPE html>
   <html>
   <head>
     <title>Wizard News</title>
