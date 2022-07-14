@@ -1,6 +1,6 @@
 const html = require("html-template-tag");
 function postDetails(post) {
-  const response = `<!DOCTYPE html>
+  const response = html`<!DOCTYPE html>
 <html>
 <head>
   <title>Wizard News</title>
