@@ -20,7 +20,6 @@ app.get("/", (req, res) => {
 );
 app.get('/posts/:id', (req, res) => {
   const id = req.params.id;
-  console.log(id)
   const post = find(id);
   if (!post.id) {
     throw new Error('Not Found')
