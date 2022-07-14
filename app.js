@@ -3,6 +3,9 @@ const app = express();
 const data = require("./postBank")
 const morgan = require('morgan')
 const {list, find} = data
+const postList = require("./views/postList");
+const postDetails = require("./views/postDetails");
+
 
 
 app.use(morgan('dev'));
@@ -10,65 +13,20 @@ app.use(express.static('public'))
 
 app.get("/", (req, res) => {
   const posts = list()
-  const html = `<!DOCTYPE html>
-  <html>
-  <head>
-    <title>Wizard News</title>
-    <link rel="stylesheet" href="/style.css" />
-  </head>
-  <body>
-    <div class="news-list">
-      <header><img src="/logo.png"/>Wizard News</header>
-      ${posts.map(post => `
-        <div class='news-item'>
-          <p>
-            <span class="news-position">${post.id}. ▲</span><a href="/posts/${post.id}">${post.title}</a>
-            <small>(by ${post.name})</small>
-          </p>
-          <small class="news-info">
-            ${post.upvotes} upvotes | ${post.date}
-          </small>
-        </div>`
-      ).join('')}
-    </div>
-  </body>
-</html>`
   
-  res.send(html)
+  res.send(postList(posts))
   posts.map((post)=>{console.log(post.name)})
 }
 );
 app.get('/posts/:id', (req, res) => {
   const id = req.params.id;
+  console.log(id)
   const post = find(id);
   if (!post.id) {
     throw new Error('Not Found')
   }
-   
-  const html = `<!DOCTYPE html>
-  <html>
-  <head>
-    <title>Wizard News</title>
-    <link rel="stylesheet" href="/style.css" />
-  </head>
-  <body>
-    <div class="news-list">
-      <header><img src="/logo.png"/>Wizard News</header>
-      ${`
-        <div class='news-item'>
-          <p>
-            <span class="news-position">${post.id}. ▲</span>${post.title}
-            <small>(by ${post.name})</small>
-          </p>
-          <span class="news-info">
-            ${post.content}
-          </span>
-        </div>
-      `}
-    </div>
-  </body>
-</html>`
-  res.send(html);
+  
+  res.send(postDetails(post));
 });
 
 const PORT = 1337;
