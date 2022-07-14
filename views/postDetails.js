@@ -1,5 +1,6 @@
+const html = require("html-template-tag");
 function postDetails(post) {
-  const html = `<!DOCTYPE html>
+  const response = `<!DOCTYPE html>
 <html>
 <head>
   <title>Wizard News</title>
@@ -22,6 +23,6 @@ function postDetails(post) {
   </div>
 </body>
 </html>`;
-  return html;
+  return response;
 }
 module.exports = postDetails

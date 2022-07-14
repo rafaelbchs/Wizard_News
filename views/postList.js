@@ -1,6 +1,6 @@
-
+const html = require("html-template-tag");
 function postList (posts){
-    const html = `<!DOCTYPE html>
+    const response = html`<!DOCTYPE html>
   <html>
   <head>
     <title>Wizard News</title>
@@ -23,6 +23,6 @@ function postList (posts){
     </div>
   </body>
 </html>`
-    return (html)
+    return (response)
 } 
 module.exports = postList
